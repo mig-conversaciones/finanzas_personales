@@ -9,13 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('categorias', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+    public function up()
+{
+    Schema::create('categorias', function (Blueprint $table) {
+        $table->id();
+        $table->string('nombre');
+        $table->enum('tipo', ['ingreso', 'gasto']);
+        $table->string('color')->nullable();
+        $table->string('icono')->nullable();
+        $table->foreignId('user_id')->constrained()->onDelete('cascade');
+        $table->timestamps();
+    });
+}
 
     /**
      * Reverse the migrations.
